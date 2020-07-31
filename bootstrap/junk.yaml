@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+Resources:
+  DummyServer:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: ""
+  InputS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Join
+        - "-"
+        - - "workshop-textract"
+          - !Select [0, !Split ["-", !Select [2, !Split ["/", !Ref "AWS::StackId"]]]]
+      NotificationConfiguration: LambdaConfigutation
+
